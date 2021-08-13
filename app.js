@@ -67,7 +67,7 @@ const galleryItems = [
 const gallery = document.querySelector(".gallery");
 const creatingGallery =  galleryItems.map(item => {
     return `<li class="gallery__item" >
-      <a class="gallery__link" href="${item.original}" >
+      <a class="gallery__link" href="#" >
       <img
       class="gallery__image"
        src="${item.preview}"
@@ -90,15 +90,50 @@ gallery.insertAdjacentHTML('beforeend', creatingGallery);
 //       Для того чтобы открыть, необходимо добавить на div.lightbox CSS-класс //z
 //     -->
 const lightbox = document.querySelector('.js-lightbox');
+const lightboxImg = document.querySelector('.lightbox__image');
+const overlay = document.querySelector('.lightbox__overlay');
 const closeModalBtn =  document.querySelector('.lightbox__button');
-console.log(lightbox);
- gallery.addEventListener('click', toggleModal);
+gallery.addEventListener('click', toggleModal);
+ 
+
 function toggleModal(evt) {
-  console.log(evt.target)
-  if (!evt.currentTarget.classList.contains('gallery__item')){return;}
+  if (evt.currentTarget.classList.contains('gallery__item')) {
+    return;
+  };
+  
+  lightbox.classList.toggle('is-open');
+   
+
+}
+function addContentToLightbox() {
+  if (!lightbox.classList.contains('is-open')) {
+   
+    const a = galleryItems.map(item => { lightboxImg.setAttribute('src', '${item.original}'); lightboxImg.setAttribute('alt', '${item.description}');  } );
+      // lightboxImg.setAttribute('alt', '${item.description}');
+      //return imgAttr;
+    return a
+  }
+}
+function closeModalByOverlay(evt) {
+  if ( evt.currentTarget.classList.contains('lightbox__overlay')) 
   lightbox.classList.toggle('is-open');
 }
- gallery.addEventListener('click', toggleModal);
- closeModalBtn.addEventListener('click', toggleModal);
+function closeModalByEsc(evt) {
+  if (  evt.key === 'Escape' ) {
+       lightbox.classList.remove('is-open'); 
+    }
+}
+gallery.addEventListener('click', toggleModal);
+addContentToLightbox();
+closeModalBtn.addEventListener('click', toggleModal);
+document.addEventListener('keydown', closeModalByEsc); 
+overlay.addEventListener('click', closeModalByOverlay);
+console.log(lightboxImg.getAttribute('src'));
+
+
+
+
+
+
 
 
