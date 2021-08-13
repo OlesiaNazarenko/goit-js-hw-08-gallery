@@ -37,14 +37,8 @@ function openModal(evt) {
 function closeModal(evt) { 
   if (evt.target.classList.contains('lightbox__button') || evt.target.classList.contains('lightbox__overlay') || evt.key === 'Escape' ) {
       lightbox.classList.remove('is-open');
-      galleryItems.forEach(item => {
-    if (evt.target.getAttribute('src') === item.original) {
-      lightboxImg.removeAttribute('src');
-        lightboxImg.setAttribute('alt');
+      galleryItems.forEach(item => {lightboxImg.removeAttribute('src')})
     }
-  })
-    }
-    
 }
 // const keyP = function (evt) {
 //     const key = evt.code;
