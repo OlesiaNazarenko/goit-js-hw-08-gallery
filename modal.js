@@ -6,7 +6,7 @@ const lightboxImg = document.querySelector('.lightbox__image');
 const overlay = document.querySelector('.lightbox__overlay');
 const closeModalBtn = document.querySelector('.lightbox__button');
 
-const creatingGallery =  galleryItems.map((item, index) => {
+const creatingGallery =  galleryItems.map((item) => {
     return `<li class="gallery__item" >
       <a class="gallery__link" href="${item.original}" >
       <img
@@ -14,7 +14,6 @@ const creatingGallery =  galleryItems.map((item, index) => {
        src="${item.preview}"
        data-source="${item.original}";
        alt="${item.description}"
-       data-index = "${index}";
      />
       </a>
       </li>`;
@@ -40,38 +39,8 @@ function closeModal(evt) {
       galleryItems.forEach(item => {lightboxImg.removeAttribute('src')})
     }
 }
-// const keyP = function (evt) {
-//     const key = evt.code;
-//     switch(key){
-//         case "ArrowLeft":
-//             galleryItems.forEach((item,index, arr) => {
-//                 if (item.original === lightboxImg.src) {
-//                     if (index === 0) {
-//                         return;
-//                     }
-//                     lightboxImg.src = arr[index - 1].original;
-//                     return;
-//                 } 
-//             });
-//             break;
-//         case "ArrowRight":
-//             galleryItems.forEach((item,index, arr) => {
-//                 if (item.original === lightboxImg.src) {
-//                     if (index === arr.length - 1) {
-//                         return;
-//                     }
-                    
-//                     console.log(index)
-//                     lightboxImg.src = arr[index  + 1].original;
-//                     return;
-//                 } 
-//             });
-// break;
-// }
-// }
+
 gallery.addEventListener('click', openModal);
 closeModalBtn.addEventListener('click', closeModal);
 document.addEventListener('keydown', closeModal); 
 overlay.addEventListener('click', closeModal);
-overlay.addEventListener('click', closeModal);
-//document.addEventListener('keydown', keyP)
